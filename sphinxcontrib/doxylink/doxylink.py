@@ -2,7 +2,7 @@
 
 import os
 import xml.etree.ElementTree as ET
-import urllib
+from urlparse import urlparse
 import itertools
 
 from docutils import nodes, utils
@@ -429,7 +429,7 @@ def create_role(app, tag_filename, rootdir):
 
                 # If it's an absolute path then the link will work regardless of the document directory
                 # Also check if it is a URL (i.e. it has a 'scheme' like 'http' or 'file')
-                if os.path.isabs(rootdir) or urllib.parse.urlparse(rootdir).scheme:
+                if os.path.isabs(rootdir) or urlparse(rootdir).scheme:
                     full_url = join(rootdir, url['file'])
                 # But otherwise we need to add the relative path of the current document to the root source directory to the link
                 else:
